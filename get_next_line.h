@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:46 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/16 11:42:29 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/16 15:25:53 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define GET_NEXT_LINE
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE = 4;
+#define BUFFER_SIZE 42
 #endif
 
 #include <stdlib.h>
