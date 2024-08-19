@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:10:35 by root              #+#    #+#             */
-/*   Updated: 2024/08/19 22:33:32 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/19 22:48:17 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define BUFFER_SIZE 42
 #endif
 
-//CALISMALARIMIZI BURADA YAPIYORUZ TEST EDIYORUZ
+//CALISMALARIMIZI BURADA YAPIYORUZ TEST EDIYORUZ. Çalışırsa Ana projeye ekliyoruz.
 
 int ft_strlen(char *str)
 {
