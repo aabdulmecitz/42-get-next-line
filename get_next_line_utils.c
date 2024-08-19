@@ -3,49 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/17 21:11:45 by root             ###   ########.fr       */
+/*   Updated: 2024/08/19 21:59:01 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int     ft_strlen(char *s)
-
+int ft_strlen(char *str)
 {
     int i;
 
     i = 0;
-    while (!s[i])
+    while (str[i])
         i++;
     return (i);
 }
 
-char    *ft_strchr(char *str, int c)
+char    *ft_strAFirstchr(char *str, int c)
 {
     int i;
+    int j;
+    char *s;
 
-    if(!str)
-        return (NULL);
     i = 0;
-    
-    return (NULL);
-}
-char    *ft_strcut(char *str)
-{
-    int size;
-    int i;
-    char *cut;
-    
-    i = 0;
-    size = ft_strlen (str);
-    while (str[i] != 0 && str[i] != '\n')
+    while (str[i])
     {
-        cut[i] = str[i];
+        if (str[i] == (char)c)
+            break;
         i++;
     }
-    return (cut);
+    i++;
+    j = 0;
+    while (str[i + j])
+        j++;
+    s = (char *)malloc((j + 1) * (sizeof(char)));
+    if (!s)
+        return (NULL);
+    while (j > 0)
+    {
+        j--;
+        s[j] = str[i + j];
+    }
+    
+    return (s);
+}
+
+char    *ft_strBFirstchr(char *str, char c)
+{
+    int i;
+    char *s;
+
+    i = 0;
+    while (str[i] && str[i] != c)
+        i++;
+    s = (char *)malloc((i + 1)*sizeof(char));
+    if (!s)
+        return (NULL);
+    s[i] = '\0';
+    while (i > 0)
+    {
+        i--;
+        s[i] = str[i];
+    }
+    return (s);    
+}
+
+char    *ft_strCombine(char *dst, char *src)
+{
+    //this function adds src on dest and returns an char *
+    int i;
+    int j;
+    char *totalStr;
+    
+    totalStr = (char *)malloc((ft_strlen(dst) + ft_strlen(src) + 1)*sizeof(char));
+    if (!totalStr)
+        return (NULL);
+    
+    i = 0;
+    while(dst[i])
+    {
+        totalStr[i] = dst[i];
+        i++;
+    }
+    j = 0;
+    while (src[j])
+    {
+        totalStr[i + j] = src[j];
+        j++;
+    }
+    totalStr[i + j] = '\0';  
+    
+    return (totalStr);
 }
 
