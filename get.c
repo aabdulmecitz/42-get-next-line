@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:10:35 by root              #+#    #+#             */
-/*   Updated: 2024/08/19 22:48:17 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/20 18:28:07 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ int ft_strlen(char *str)
     return (i);
 }
 
+char *ft_strchr(char *s, char c)
+{
+    while (s++)
+        if (*s == c)
+            break;
+    return s;
+}
+//---------------------------------------------------------------------
 char    *ft_strAFirstchr(char *str, int c)
 {
     int i;
@@ -108,6 +116,59 @@ char    *ft_strCombine(char *dst, char *src)
     
     return (totalStr);
 }
+//-------------------------------------------------------------------
+char    *ft_strjoin_and_free(char *dst, char *src)
+{
+    //this function adds src on dest and returns an char *
+    int i;
+    int j;
+    char *totalStr;
+    
+    totalStr = (char *)malloc((ft_strlen(dst) + ft_strlen(src) + 1)*sizeof(char));
+    if (!totalStr)
+        return (NULL);
+    
+    i = 0;
+    while(dst[i])
+    {
+        totalStr[i] = dst[i];
+        i++;
+    }
+    j = 0;
+    while (src[j])
+    {
+        totalStr[i + j] = src[j];
+        j++;
+    }
+    totalStr[i + j] = '\0';  
+    free(src);
+    return (totalStr);
+}
+
+char    *ft_read_first_line(int fd)
+{
+    static char *buff;
+    char *line;
+    int a;
+    
+    if (buff == NULL)
+        buff = (char *)malloc(BUFFER_SIZE + 1);
+    if (!buff)
+        return (NULL);
+    a = read(fd, buff, BUFFER_SIZE);
+    if (a <= 0)
+    {
+        free (buff);
+        buff = NULL;
+    }    
+    buff[a] = '\0';
+    line = ft_strBFirstchr(buff, '\n');
+    if (!line)
+        return (ft_strjoin_and_free(buff, "")); // Tüm satır okundu
+    buff = ft_strAFirstchr(buff, '\n');
+    
+    return (line);
+}
 
 char    *get_next_line(int fd) {
     /*
@@ -140,41 +201,39 @@ char    *get_next_line(int fd) {
     }
     
     */
-    static char * currentStr; //döndüreceğimiz ve strjoinle üzerine ekleme yapacağımız string
+    char * currentStr; //döndüreceğimiz ve strjoinle üzerine ekleme yapacağımız string
     static char *lastPartOfBuff; //buff size kadar alanda eğer biz \n bulursak strcpy ile \n in bulunduğu kısımdan sonraki diziyi ifade eder.
     char *totalStr;
     int i;
     char buff[BUFFER_SIZE + 1]; //Her fonksiyon çağırıldığında read fonksiyonu ile okuyacağımız ve geçici olarak üzerine yazacağımız string mallocla açılmalı.
     int a;
     
-    if (lastPartOfBuff != NULL)
+    if (lastPartOfBuff)
     {
-        while (*lastPartOfBuff)
+        currentStr = ft_strBFirstchr(lastPartOfBuff, '\n');
+        if (ft_strlen(currentStr) < ft_strlen(lastPartOfBuff))
         {
-            if(*lastPartOfBuff == '\n')
-            {
-                currentStr = ft_strBFirstchr(lastPartOfBuff, '\n');
-                lastPartOfBuff = ft_strAFirstchr(lastPartOfBuff, '\n');
-                break;
-            }
-            lastPartOfBuff++;    
+            lastPartOfBuff = ft_strAFirstchr(lastPartOfBuff, '\n');
+            return (currentStr);
         }
-        totalStr = ft_strCombine(currentStr, lastPartOfBuff);
+        free(lastPartOfBuff);
+        lastPartOfBuff = NULL;
+    }
+
+    
+    while ((a = read(fd, buff, BUFFER_SIZE)) > 0) {
+        buff[a] = '\0'; // null-terminate the buffer
+        if (ft_strchr(buff, '\n'))
+        {
+            currentStr = ft_strjoin_and_free(currentStr, ft_strBFirstchr(buff, '\n'));
+            lastPartOfBuff = ft_strAFirstchr(buff, '\n');
+            break;
+        }
+        currentStr = ft_strjoin_and_free(currentStr, buff);
+        
     }
     
-    if (!(a = read(fd, buff, BUFFER_SIZE))) //a nın null olup olmadığına bakıyoruz nullsa boşluk döndürüyoruz.
-    {
-        currentStr[0] = '\0';
-        return (NULL);
-    }
-    if (!currentStr)
-    {
-        currentStr = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-        if (!currentStr)
-            return (NULL);
-    }
-    
-    return totalStr;
+    return currentStr;
 }
 
 int main(int argc, char const *argv[])
@@ -185,11 +244,7 @@ int main(int argc, char const *argv[])
     str = (char *)malloc((BUFFER_SIZE + 1)*sizeof(char));
     if (!str)
         return 0;
-    
-    read(fd, str, BUFFER_SIZE);
-    
-    printf("%s", get_next_line(fd));
-    
+            
     // // printf("%s", get_next_line(fd));
 
     // // printf("%s", get_next_line(fd));
@@ -201,12 +256,36 @@ int main(int argc, char const *argv[])
     // read(fd, str, BUFFER_SIZE);
 
     // printf("STR: %s\n------------------------\n", str);
-    printf("\n--------------------------------------------------------------\n");
-    printf("%s", ft_strAFirstchr("hga;lsdkfasgas\naaaaasdfgsd", '\n'));
-    printf("\n--------------------------------------------------------------\n");
-    printf("%s", ft_strBFirstchr("hga;lsdkfasgas\naaaaasdfgsd", '\n'));
-    printf("\n--------------------------------------------------------------\n");
-    printf("%s", ft_strCombine(ft_strBFirstchr("hga;lsdkfasgas\naaaaasdfgsd", '\n'), ft_strAFirstchr("hga;lsdkfasgas\naaaaasdfgsd", '\n')));
+    printf("\n------------------------------------\n");
+        printf("%s", ft_read_first_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
+    printf("\n------------------------------------\n");
+        printf("%s", get_next_line(fd));
 
     return 0;
 }
