@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:10:35 by root              #+#    #+#             */
-/*   Updated: 2024/08/20 18:28:07 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/23 21:31:20 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ int ft_strlen(char *str)
     return (i);
 }
 
-char *ft_strchr(char *s, char c)
+char *ft_strchr(const char *s, char c)
 {
-    while (s++)
+    while (*s)
+    {
         if (*s == c)
-            break;
-    return s;
+            return (char *)s;
+        s++;
+    }
+    if (*s == '\0')
+        return (char *)s;
+    return NULL;
 }
 //---------------------------------------------------------------------
 char    *ft_strAFirstchr(char *str, int c)
@@ -141,33 +146,25 @@ char    *ft_strjoin_and_free(char *dst, char *src)
         j++;
     }
     totalStr[i + j] = '\0';  
-    free(src);
     return (totalStr);
 }
 
-char    *ft_read_first_line(int fd)
+char    *ft_strowrite(char *dest, char *src)
 {
-    static char *buff;
-    char *line;
-    int a;
-    
-    if (buff == NULL)
-        buff = (char *)malloc(BUFFER_SIZE + 1);
-    if (!buff)
-        return (NULL);
-    a = read(fd, buff, BUFFER_SIZE);
-    if (a <= 0)
+    int i;
+
+    i = 0;
+    free(dest);
+    dest = (char *)malloc((ft_strlen(src) + 1) * sizeof(char));
+    if (!dest)
+        return NULL;
+    while (src[i])
     {
-        free (buff);
-        buff = NULL;
-    }    
-    buff[a] = '\0';
-    line = ft_strBFirstchr(buff, '\n');
-    if (!line)
-        return (ft_strjoin_and_free(buff, "")); // Tüm satır okundu
-    buff = ft_strAFirstchr(buff, '\n');
-    
-    return (line);
+        dest[i] = src[i];
+        i++;
+    }
+    dest[ft_strlen(src)] = '\0';
+    return dest;
 }
 
 char    *get_next_line(int fd) {
@@ -208,29 +205,30 @@ char    *get_next_line(int fd) {
     char buff[BUFFER_SIZE + 1]; //Her fonksiyon çağırıldığında read fonksiyonu ile okuyacağımız ve geçici olarak üzerine yazacağımız string mallocla açılmalı.
     int a;
     
-    if (lastPartOfBuff)
-    {
-        currentStr = ft_strBFirstchr(lastPartOfBuff, '\n');
-        if (ft_strlen(currentStr) < ft_strlen(lastPartOfBuff))
-        {
-            lastPartOfBuff = ft_strAFirstchr(lastPartOfBuff, '\n');
-            return (currentStr);
-        }
-        free(lastPartOfBuff);
-        lastPartOfBuff = NULL;
-    }
-
+    currentStr = (char *)malloc(1);
     
-    while ((a = read(fd, buff, BUFFER_SIZE)) > 0) {
+    while ((a = read(fd, buff, BUFFER_SIZE)) > 0) 
+    {
         buff[a] = '\0'; // null-terminate the buffer
+        if (lastPartOfBuff)
+        {
+            ft_strowrite(currentStr,ft_strBFirstchr(lastPartOfBuff, '\n'));
+            if (ft_strlen(currentStr) < ft_strlen(lastPartOfBuff))
+            {
+                lastPartOfBuff = ft_strAFirstchr(lastPartOfBuff, '\n');
+                return (currentStr);
+            }
+            free(lastPartOfBuff);
+            lastPartOfBuff = NULL;
+        }
+        
         if (ft_strchr(buff, '\n'))
         {
-            currentStr = ft_strjoin_and_free(currentStr, ft_strBFirstchr(buff, '\n'));
             lastPartOfBuff = ft_strAFirstchr(buff, '\n');
+            currentStr = ft_strjoin_and_free(currentStr, buff);
             break;
         }
-        currentStr = ft_strjoin_and_free(currentStr, buff);
-        
+        currentStr = ft_strjoin_and_free(currentStr,buff);
     }
     
     return currentStr;
@@ -238,54 +236,38 @@ char    *get_next_line(int fd) {
 
 int main(int argc, char const *argv[])
 {
+    char    *s1 = "kokokok";
+    char    *s2 = "aaaaaa";
     int fd = open("deneme.txt", O_RDWR);
-    char *str;
 
-    str = (char *)malloc((BUFFER_SIZE + 1)*sizeof(char));
-    if (!str)
-        return 0;
-            
-    // // printf("%s", get_next_line(fd));
-
-    // // printf("%s", get_next_line(fd));
-
-    // // printf("%s", get_next_line(fd));
-
-    // printf("STR: %s\n------------------------\n", str);
-
-    // read(fd, str, BUFFER_SIZE);
-
-    // printf("STR: %s\n------------------------\n", str);
-    printf("\n------------------------------------\n");
-        printf("%s", ft_read_first_line(fd));
     printf("\n------------------------------------\n");
         printf("%s", get_next_line(fd));
     printf("\n------------------------------------\n");
         printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
-    printf("\n------------------------------------\n");
-        printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
+    // printf("\n------------------------------------\n");
+    //     printf("%s", get_next_line(fd));
 
     return 0;
 }
