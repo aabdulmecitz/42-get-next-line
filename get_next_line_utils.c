@@ -6,96 +6,76 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/19 21:59:01 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/24 19:01:22 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int         ft_strlen(const char *s)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
-char    *ft_strAFirstchr(char *str, int c)
+const char	*ft_strchr(const char *s, int c)
 {
-    int i;
-    int j;
-    char *s;
-
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == (char)c)
-            break;
-        i++;
-    }
-    i++;
-    j = 0;
-    while (str[i + j])
-        j++;
-    s = (char *)malloc((j + 1) * (sizeof(char)));
-    if (!s)
-        return (NULL);
-    while (j > 0)
-    {
-        j--;
-        s[j] = str[i + j];
-    }
-    
-    return (s);
+	const char	*str;
+    // str[0] = 1;
+	str = s;
+	while (*str != c)
+	{
+		if (*str == '\0')
+			return (NULL);
+		str++;
+	}
+	return (str);
 }
 
-char    *ft_strBFirstchr(char *str, char c)
+char        *ft_strjoin(char *s1, char *s2)
 {
-    int i;
-    char *s;
+	char	*start;
+	char	*str;
 
-    i = 0;
-    while (str[i] && str[i] != c)
-        i++;
-    s = (char *)malloc((i + 1)*sizeof(char));
-    if (!s)
-        return (NULL);
-    s[i] = '\0';
-    while (i > 0)
-    {
-        i--;
-        s[i] = str[i];
-    }
-    return (s);    
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	start = str;
+	while (*s1)
+		*str++ = *s1++;
+	while (*s2)
+		*str++ = *s2++;
+	*str = '\0';
+	return (start);
 }
 
-char    *ft_strCombine(char *dst, char *src)
+char        *ft_strdup(const char *s) 
 {
-    //this function adds src on dest and returns an char *
-    int i;
-    int j;
-    char *totalStr;
+    char *dup;
+    size_t len = 0;
     
-    totalStr = (char *)malloc((ft_strlen(dst) + ft_strlen(src) + 1)*sizeof(char));
-    if (!totalStr)
-        return (NULL);
+    // Calculate the length of the string
+    while (s[len])
+        len++;
     
-    i = 0;
-    while(dst[i])
-    {
-        totalStr[i] = dst[i];
-        i++;
+    // Allocate memory for the duplicate string (+1 for the null terminator)
+    dup = (char *)malloc((len + 1) * sizeof(char));
+    if (!dup)
+        return NULL; // Allocation failed
+    
+    // Copy the string
+    for (size_t i = 0; i < len; i++) {
+        dup[i] = s[i];
     }
-    j = 0;
-    while (src[j])
-    {
-        totalStr[i + j] = src[j];
-        j++;
-    }
-    totalStr[i + j] = '\0';  
     
-    return (totalStr);
+    // Null-terminate the duplicate string
+    dup[len] = '\0';
+    
+    return dup;
 }
-
