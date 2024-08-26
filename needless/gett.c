@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:05:59 by kali              #+#    #+#             */
-/*   Updated: 2024/08/24 21:38:57 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/26 18:30:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 9999
+#define BUFFER_SIZE 63
 #endif
 
 int         ft_strlen(const char *s)
@@ -79,57 +79,63 @@ char        *ft_strdup(const char *s)
     return dup;
 }
 
-char *get_next_line(int fd)
+void    ft_strsub(char * str, char * sublimine)
 {
-    static char *buf;
+    char *s;
+    size_t len;
+
+    len = ft_strlen(str) - ft_strlen(sublimine);
+    s = malloc(len + 1);
+    while (len > 0)
+    {
+        len--;
+        s[len] = str[len];
+    }
+    str = s;
+}
+
+char *get_next_line(int fd) 
+{
+    static char *buf = NULL;
     char temp[BUFFER_SIZE + 1];
     char *newline_pos;
-    char *str;
-    int bytes_read;
-
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return NULL;
-
-    // Allocate buffer if not already allocated
-    if (!buf)
-    {
-        buf = malloc(1);
+    char *str = NULL;
+    int a;
+    
+    if (!buf) {
+        buf = malloc(BUFFER_SIZE + 1);
         if (!buf)
-            return NULL;
+            return (NULL); // Allocation failed
         buf[0] = '\0';
     }
-
-    while ((bytes_read = read(fd, temp, BUFFER_SIZE)) > 0)
+    
+    while ((a = read(fd, temp, BUFFER_SIZE)) > 0) 
     {
-        temp[bytes_read] = '\0';
-        char *new_buf = ft_strjoin(buf, temp);
-        free(buf);
-        buf = new_buf;
-
+        temp[a] = '\0';
+        buf = ft_strjoin(buf, temp);
         newline_pos = (char *)ft_strchr(buf, '\n');
-        if (newline_pos)
-        {
+        if (newline_pos) {
             *newline_pos = '\0';
             str = ft_strdup(buf);
-            char *remaining = ft_strdup(newline_pos + 1);
-            free(buf);
-            buf = remaining;
+            buf = ft_strdup(newline_pos + 1);
             return str;
         }
     }
-
-    if (bytes_read < 0 || (bytes_read == 0 && (!buf || *buf == '\0')))
-    {
+    
+    // If we exit the loop without finding a newline
+    if (buf && *buf) {
+        printf("----kkkk-----");
+        str = ft_strdup(buf);
         free(buf);
         buf = NULL;
-        return "\n";
+        return str;
     }
-
-    str = ft_strdup(buf);
+    
     free(buf);
-    buf = NULL;  
-    return str;
+    buf = NULL;
+    return "\0";
 }
+
 
 int main(int argc, char const *argv[])
 {
