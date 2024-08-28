@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/24 19:02:02 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/28 19:11:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@ char *get_next_line(int fd)
     char *str = NULL;
     int a;
     
-    if (!buf) {
+    if (!buf) 
+    {
         buf = malloc(BUFFER_SIZE + 1);
         if (!buf)
             return (NULL); // Allocation failed
         buf[0] = '\0';
     }
     
-    while ((a = read(fd, temp, BUFFER_SIZE)) > 0) {
+    while ((a = read(fd, temp, BUFFER_SIZE)) > 0) 
+    {
         temp[a] = '\0';
         buf = ft_strjoin(buf, temp);
         newline_pos = (char *)ft_strchr(buf, '\n');
-        if (newline_pos) {
+        if (newline_pos) 
+        {
             *newline_pos = '\0';
             str = ft_strdup(buf);
             buf = ft_strdup(newline_pos + 1);
-            return str;
+            return ft_strjoin(str, "\n");
         }
     }
     
@@ -44,10 +47,10 @@ char *get_next_line(int fd)
         str = ft_strdup(buf);
         free(buf);
         buf = NULL;
-        return str;
+        return ft_strjoin(str, "\n");
     }
     
     free(buf);
     buf = NULL;
-    return NULL;
+    return "\0";
 }
