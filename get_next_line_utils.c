@@ -6,13 +6,13 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/24 19:01:22 by kali             ###   ########.fr       */
+/*   Updated: 2024/08/30 19:39:40 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int         ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int         ft_strlen(const char *s)
 const char	*ft_strchr(const char *s, int c)
 {
 	const char	*str;
-    // str[0] = 1;
+
 	str = s;
 	while (*str != c)
 	{
@@ -36,7 +36,7 @@ const char	*ft_strchr(const char *s, int c)
 	return (str);
 }
 
-char        *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*start;
 	char	*str;
@@ -55,27 +55,34 @@ char        *ft_strjoin(char *s1, char *s2)
 	return (start);
 }
 
-char        *ft_strdup(const char *s) 
+char	*ft_strdup(const char	*s)
 {
-    char *dup;
-    size_t len = 0;
-    
-    // Calculate the length of the string
-    while (s[len])
-        len++;
-    
-    // Allocate memory for the duplicate string (+1 for the null terminator)
-    dup = (char *)malloc((len + 1) * sizeof(char));
-    if (!dup)
-        return NULL; // Allocation failed
-    
-    // Copy the string
-    for (size_t i = 0; i < len; i++) {
-        dup[i] = s[i];
-    }
-    
-    // Null-terminate the duplicate string
-    dup[len] = '\0';
-    
-    return dup;
+	char	*dup;
+	size_t	len;
+	size_t	i;
+
+	len = 0;
+	i = 0;
+	while (s[len])
+		len++;
+	dup = (char *)malloc((len + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[len] = '\0';
+	return (dup);
+}
+
+char	*ft_read_and_join(int fd, char *buf, int *bytes_read)
+{
+	char	temp[BUFFER_SIZE + 1];
+
+	*bytes_read = read(fd, temp, BUFFER_SIZE);
+	temp[*bytes_read] = '\0';
+	buf = ft_strjoin(buf, temp);
+	return (buf);
 }
