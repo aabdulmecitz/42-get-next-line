@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/08/30 19:39:40 by kali             ###   ########.fr       */
+/*   Updated: 2024/10/24 23:18:22 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ int	ft_strlen(const char *s)
 
 const char	*ft_strchr(const char *s, int c)
 {
-	const char	*str;
-
-	str = s;
-	while (*str != c)
+	while (*s)
 	{
-		if (*str == '\0')
-			return (NULL);
-		str++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	return (str);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
