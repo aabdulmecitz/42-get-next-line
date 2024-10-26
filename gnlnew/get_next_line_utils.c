@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/26 06:48:58 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/26 20:30:55 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ char *ft_substr(const char *s, unsigned int start, size_t len)
 
     if (!s)
         return (NULL);
-    if (start >= strlen(s))
-        return (strdup(""));
+    if (start >= ft_strlen(s))
+        return (ft_strdup(""));
     substr = (char *)malloc(sizeof(char) * (len + 1));
     if (!substr)
         return (NULL);

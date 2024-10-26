@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:46 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/26 06:46:41 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/26 22:27:48 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
+
+#   define RED "\033[31m"
+#   define GREEN "\033[32m"
+#   define YELLOW "\033[33m"
+#   define BLUE "\033[34m"
+#   define RESET "\033[0m"
+
 # endif
 
 # include <stdlib.h>
