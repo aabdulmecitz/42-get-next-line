@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:54:06 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/27 01:46:31 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/27 02:11:02 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 
 int main(int argc, char const *argv[])
 {
-	int fd = open("deneme.txt", O_RDONLY);
+	char	*line;
+	int		fd1;
 
-    char *line = get_next_line(fd);
-    printf(GREEN "%s\n" RESET, line);
-    printf(GREEN "%s\n" RESET, line);
-    printf(GREEN "%s\n" RESET, line);
-    printf(GREEN "%s\n" RESET, line);
-    close(fd);
-    return 0;
+	fd1 = open("deneme.txt", O_RDONLY);
+
+    line = get_next_line(fd1);
+    printf("%s\n", line);
+    free(line);
+
+    line = get_next_line(fd1);
+    printf("%s\n", line);
+    free(line);
 
 
 

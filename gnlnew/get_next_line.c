@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/27 02:07:21 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/27 02:25:29 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,29 @@ char	*ft_get_line(char *str)
 	
 }
 
-char	*ft_append_to_left_one(int fd, char *buf, int *read_bytes)
+char	*ft_append_to_left_one(int fd, char *buf)
 {
 	char	temp[BUFFER_SIZE + 1];
+    int     read_bytes;
 
     if (!buf)
 		buf = ft_strdup("");
-	while (!ft_strchr(buf, '\n') && *read_bytes != 0)
+    read_bytes = 1;
+	while (!ft_strchr(buf, '\n') && read_bytes != 0)
 	{
-		*read_bytes = read(fd, temp, BUFFER_SIZE);
-		if (*read_bytes < 0)
+		read_bytes = read(fd, temp, BUFFER_SIZE);
+		if (read_bytes < 0)
 		{
 			free(buf);
 			return (NULL);
 		}
-		temp[*read_bytes] = '\0';
+		temp[read_bytes] = '\0';
 		buf = ft_strjoin(buf, temp);
        
 	}
 	return (buf);
 }
-char *ft_extract_after_newline(char *input_str) 
+char *ft_after_newline(char *input_str) 
 {
     char *start;
     char *result;
@@ -73,12 +75,10 @@ char	*get_next_line(int fd)
 {
 	static char	*buf;
 	char		*line;
-	int			read_bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	read_bytes = 1;
-	buf = ft_append_to_left_one(fd, buf, &read_bytes);
+	buf = ft_append_to_left_one(fd, buf);
 	if (!buf || !*buf)
 	{
 		free(buf);
@@ -86,6 +86,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = ft_get_line(buf);
-	buf = ft_extract_after_newline(buf);
+    buf = ft_after_newline(buf);
+
 	return (line);
 }
