@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/26 20:30:55 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/27 00:12:23 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,6 @@ char	*ft_strdup(const char	*s)
 	}
 	dup[len] = '\0';
 	return (dup);
-}
-
-char	*ft_read_and_join(int fd, char *buf, int *bytes_read)
-{
-	char	temp[BUFFER_SIZE + 1];
-
-	*bytes_read = read(fd, temp, BUFFER_SIZE);
-	temp[*bytes_read] = '\0';
-	buf = ft_strjoin(buf, temp);
-	return (buf);
 }
 
 char *ft_substr(const char *s, unsigned int start, size_t len)
