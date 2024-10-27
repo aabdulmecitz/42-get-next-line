@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/27 09:01:06 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/27 13:02:48 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*s2)
 		*str++ = *s2++;
 	*str = '\0';
+	free(s1 - ft_strlen(s1));
 	return (start);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/27 09:03:34 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/27 13:09:34 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_get_line(char *str)
 	int i;
 
 	i = 0;
-	if (!str || !*str)
-		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;	
 	return(ft_substr(str, 0, i));
@@ -64,11 +62,8 @@ char *ft_after_newline(char *input_str)
 	input_str++;
 	result_size = ft_strlen(input_str);
     result = (char *)malloc(sizeof(char) * (result_size + 1));
-    if (!result) 
-	{
-        free(start);
+    if (!result)
         return (NULL);
-    }
     while (*input_str)
         *result++ = *input_str++;
     *result = '\0';
@@ -93,5 +88,6 @@ char	*get_next_line(int fd)
 	}
 	line = ft_get_line(buf);
     buf = ft_after_newline(buf);
+
 	return (line);
 }
