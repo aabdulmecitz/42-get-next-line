@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/27 13:09:34 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/27 16:42:37 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_append_to_left_one(int fd, char *buf)
 		}
 		temp[read_bytes] = '\0';
 		buf = ft_strjoin(buf, temp);
-       
 	}
 	return (buf);
 }
