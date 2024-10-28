@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/28 13:33:10 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/28 21:43:37 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_append_to_left_one(int fd, char *buf)
 {
 	char	temp[BUFFER_SIZE + 1];
     int     read_bytes;
+	char	*new_buf;
 
     if (!buf)
 		buf = ft_strdup("");
@@ -40,7 +41,9 @@ char	*ft_append_to_left_one(int fd, char *buf)
 			return (NULL);
 		}
 		temp[read_bytes] = '\0';
-		buf = ft_strjoin(buf, temp);
+		new_buf = ft_strjoin(buf, temp);
+		free(buf);
+		buf = new_buf;
 	}
 	return (buf);
 }
@@ -87,6 +90,5 @@ char	*get_next_line(int fd)
 	}
 	line = ft_get_line(buf);
     buf = ft_after_newline(buf);
-
 	return (line);
 }
