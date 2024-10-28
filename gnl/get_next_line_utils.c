@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/27 13:02:48 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/28 15:50:21 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*start;
 	char	*str;
+	char	*t;
 
 	if (!s1 || !s2)
 		return (NULL);
+	t = s1;
 	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -51,7 +53,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (*s2)
 		*str++ = *s2++;
 	*str = '\0';
-	free(s1 - ft_strlen(s1));
+	free(t);
 	return (start);
 }
 

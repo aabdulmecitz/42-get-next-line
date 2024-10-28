@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:54:06 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/27 16:53:11 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/28 17:26:52 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ int main(int argc, char const *argv[])
 
     line = get_next_line(fd1);
     printf("%s\n", line);
-
+    free(line);
     line = get_next_line(fd1);
     printf("%s\n", line);
-
-
-    printf("%s\n", line);
-    
+    free(line);
 
 	
 	// int fd;
@@ -52,3 +49,6 @@ int main(int argc, char const *argv[])
 }
 //get_line function gets a line from the string that we read and joined
 //one more strings until function found \n character
+
+
+//PROJ=./gnl docker compose -f ./compose.yml run francinette
