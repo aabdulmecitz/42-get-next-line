@@ -6,7 +6,7 @@
 /*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:54:06 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/28 21:46:26 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/28 21:50:19 by aabdulmecit      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,5 @@ int main(int argc, char const *argv[])
 
 
 //PROJ=./gnl docker compose -f ./compose.yml run francinette
+
+//valgrind --show-leak-kinds=all --track-origins=yes --leak-check=full ./gnl.out
