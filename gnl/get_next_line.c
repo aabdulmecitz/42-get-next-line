@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/28 21:43:37 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/29 11:46:44 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ft_append_to_left_one(int fd, char *buf)
 	}
 	return (buf);
 }
+
 char *ft_after_newline(char *input_str) 
 {
     char *start;
@@ -76,7 +77,7 @@ char *ft_after_newline(char *input_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
+	static char	*buf = NULL;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
