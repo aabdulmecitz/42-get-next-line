@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:52:01 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 13:52:03 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 14:19:51 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 9
 
 #   define RED "\033[31m"
 #   define GREEN "\033[32m"

@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 13:51:58 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 14:34:33 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char *ft_after_newline(char *input_str)
     char *start;
     char *result;
 	size_t result_size;
+	char *tmp;
+
     
 	start = input_str;
     while (*input_str && *input_str != '\n')
@@ -67,10 +69,13 @@ char *ft_after_newline(char *input_str)
 	input_str++;
 	result_size = ft_strlen(input_str);
     result = (char *)malloc(sizeof(char) * (result_size + 1));
+	tmp = result;
     if (!result)
         return (NULL);
     while (*input_str)
+	{
         *result++ = *input_str++;
+	}
     *result = '\0';
     free(start);
 	result -= result_size;
@@ -93,5 +98,6 @@ char	*get_next_line(int fd)
 	}
 	line = ft_get_line(buf);
     buf = ft_after_newline(buf);
+
 	return (line);
 }
