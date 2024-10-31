@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 14:34:33 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 14:50:41 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char *ft_after_newline(char *input_str)
     }
 	input_str++;
 	result_size = ft_strlen(input_str);
+	//sıkıntı olan kısım bu
     result = (char *)malloc(sizeof(char) * (result_size + 1));
 	tmp = result;
     if (!result)
