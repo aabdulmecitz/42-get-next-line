@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 02:27:39 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/29 14:13:03 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:31:40 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ char	*ft_get_line(char *str)
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
-		i++;	
+		i++;
+	if (str[i] == '\n')
+		i++;
 	return(ft_substr(str, 0, i));
 	
 }

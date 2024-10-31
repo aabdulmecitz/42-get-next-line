@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:54:06 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/28 21:50:19 by aabdulmecit      ###   ########.fr       */
+/*   Updated: 2024/10/31 13:15:39 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,27 @@ int main(int argc, char const *argv[])
 	fd1 = open("./deneme.txt", O_RDONLY);
 
     line = get_next_line(fd1);
-    printf("%s\n", line);
+    printf("%s", line);
     free(line);
     line = get_next_line(fd1);
-    printf("%s\n", line);
+    printf("%s", line);
     free(line);
+    line = get_next_line(fd1);
+    printf("%s", line);
+    free(line);
+    line = get_next_line(fd1);
+    printf("%s", line);
+    free(line);
+    line = get_next_line(fd1);
+    printf("%s", line);
+    free(line);
+    line = get_next_line(fd1);
+    printf("%s", line);
+    free(line);
+    line = get_next_line(fd1);
+    printf("%s", line);
+    free(line);
+
 
 	
 	// int fd;
