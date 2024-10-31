@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 19:51:15 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:54:18 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 
 char	*ft_get_line(char *str)
@@ -82,19 +82,19 @@ char	*ft_after_newline(char *input_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf = NULL;
+	static char	*buf[4242];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = ft_append_to_left_one(fd, buf);
-	if (!buf || !*buf)
+	buf[fd] = ft_append_to_left_one(fd, buf[fd]);
+	if (!buf[fd] || !*buf[fd])
 	{
-		free(buf);
-		buf = NULL;
+		free(buf[fd]);
+		buf[fd] = NULL;
 		return (NULL);
 	}
-	line = ft_get_line(buf);
-	buf = ft_after_newline(buf);
+	line = ft_get_line(buf[fd]);
+	buf[fd] = ft_after_newline(buf[fd]);
 	return (line);
 }
