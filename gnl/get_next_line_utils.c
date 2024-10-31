@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabdulmecitz <aabdulmecitz@student.42.f    +#+  +:+       +#+        */
+/*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 02:27:31 by aabdulmecit       #+#    #+#             */
-/*   Updated: 2024/10/28 21:56:04 by aabdulmecit      ###   ########.fr       */
+/*   Created: 2024/10/31 13:51:47 by aozkaya           #+#    #+#             */
+/*   Updated: 2024/10/31 13:51:50 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
