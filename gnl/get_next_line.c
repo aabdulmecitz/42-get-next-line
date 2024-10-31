@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 18:30:53 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:33:59 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_get_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str || !*str)
@@ -23,19 +23,18 @@ char	*ft_get_line(char *str)
 		i++;
 	if (str[i] == '\n')
 		i++;
-	return(ft_substr(str, 0, i));
-	
+	return (ft_substr(str, 0, i));
 }
 
 char	*ft_append_to_left_one(int fd, char *buf)
 {
 	char	temp[BUFFER_SIZE + 1];
-    int     read_bytes;
+	int		read_bytes;
 	char	*new_buf;
 
-    if (!buf)
+	if (!buf)
 		buf = ft_strdup("");
-    read_bytes = 1;
+	read_bytes = 1;
 	while (!ft_strchr(buf, '\n') && read_bytes != 0)
 	{
 		read_bytes = read(fd, temp, BUFFER_SIZE);
@@ -52,31 +51,32 @@ char	*ft_append_to_left_one(int fd, char *buf)
 	return (buf);
 }
 
-char *ft_after_newline(char *input_str) 
+char	*ft_after_newline(char *input_str)
 {
-    int i = 0;
-    int j;
-    char *result;
+	int		i;
+	int		j;
+	char	*result;
 
+	i = 0;
 	if (!input_str)
-        return (NULL);
-    while (input_str[i] && input_str[i] != '\n')
-        i++;
-    if (!input_str[i] || !input_str[i + 1])
-    {
-        free(input_str);
-        return (NULL);
-    }
-    result = (char *)malloc(sizeof(char) * (ft_strlen(input_str) - i));
-    if (!result)
-        return (NULL);
-    i++;
-    j = 0;
-    while (input_str[i])
-        result[j++] = input_str[i++];
-    result[j] = '\0';
-    free(input_str);
-    return (result);
+		return (NULL);
+	while (input_str[i] && input_str[i] != '\n')
+		i++;
+	if (!input_str[i] || !input_str[i + 1])
+	{
+		free(input_str);
+		return (NULL);
+	}
+	result = (char *)malloc(sizeof(char) * (ft_strlen(input_str) - i));
+	if (!result)
+		return (NULL);
+	i++;
+	j = 0;
+	while (input_str[i])
+		result[j++] = input_str[i++];
+	result[j] = '\0';
+	free(input_str);
+	return (result);
 }
 
 char	*get_next_line(int fd)
@@ -94,7 +94,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = ft_get_line(buf);
-    buf = ft_after_newline(buf);
-
+	buf = ft_after_newline(buf);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:47 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 13:51:50 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 19:34:44 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (start);
 }
 
-char	*ft_strdup(const char	*s)
+char	*ft_strdup(const char *s)
 {
 	char	*dup;
 	size_t	len;
@@ -76,24 +76,24 @@ char	*ft_strdup(const char	*s)
 	return (dup);
 }
 
-char *ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-    char *substr;
-    size_t i;
+	char	*substr;
+	size_t	i;
 
-    if (!s)
-        return (NULL);
-    if (start >= (unsigned int)ft_strlen(s))
-        return (ft_strdup(""));
-    substr = (char *)malloc(sizeof(char) * (len + 1));
-    if (!substr)
-        return (NULL);
-    i = 0;
-    while (i < len && s[start + i])
-    {
-        substr[i] = s[start + i];
-        i++;
-    }
-    substr[i] = '\0';
-    return (substr);
+	if (!s)
+		return (NULL);
+	if (start >= (unsigned int)ft_strlen(s))
+		return (ft_strdup(""));
+	substr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!substr)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
+	return (substr);
 }

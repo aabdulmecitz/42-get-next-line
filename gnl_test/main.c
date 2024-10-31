@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:54:06 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 14:16:21 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 18:47:38 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int main(int argc, char const *argv[])
 	char	*line;
 	int		fd1;
 
-	fd1 = open("./deneme.txt", O_RDONLY);
-
+    fd1 = open("asdsadsa.txt", O_RDWR);
     line = get_next_line(fd1);
     printf("%s", line);
     free(line);
