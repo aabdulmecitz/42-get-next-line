@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 14:50:41 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/10/31 18:30:53 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_get_line(char *str)
 	int i;
 
 	i = 0;
+	if (!str || !*str)
+		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
@@ -52,34 +54,28 @@ char	*ft_append_to_left_one(int fd, char *buf)
 
 char *ft_after_newline(char *input_str) 
 {
-    char *start;
+    int i = 0;
+    int j;
     char *result;
-	size_t result_size;
-	char *tmp;
 
-    
-	start = input_str;
-    while (*input_str && *input_str != '\n')
-        input_str++;
-    if (!*input_str) 
-	{
-        free(start);
+	if (!input_str)
+        return (NULL);
+    while (input_str[i] && input_str[i] != '\n')
+        i++;
+    if (!input_str[i] || !input_str[i + 1])
+    {
+        free(input_str);
         return (NULL);
     }
-	input_str++;
-	result_size = ft_strlen(input_str);
-	//sıkıntı olan kısım bu
-    result = (char *)malloc(sizeof(char) * (result_size + 1));
-	tmp = result;
+    result = (char *)malloc(sizeof(char) * (ft_strlen(input_str) - i));
     if (!result)
         return (NULL);
-    while (*input_str)
-	{
-        *result++ = *input_str++;
-	}
-    *result = '\0';
-    free(start);
-	result -= result_size;
+    i++;
+    j = 0;
+    while (input_str[i])
+        result[j++] = input_str[i++];
+    result[j] = '\0';
+    free(input_str);
     return (result);
 }
 
