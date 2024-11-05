@@ -6,7 +6,7 @@
 /*   By: aozkaya <aozkaya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:55 by aozkaya           #+#    #+#             */
-/*   Updated: 2024/10/31 20:08:34 by aozkaya          ###   ########.fr       */
+/*   Updated: 2024/11/05 12:08:32 by aozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_append_to_left_one(int fd, char *buf)
 	int		read_bytes;
 	char	*new_buf;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	temp = malloc(BUFFER_SIZE + 1);
 	if (!temp)
 		return (NULL);
@@ -43,11 +45,7 @@ char	*ft_append_to_left_one(int fd, char *buf)
 	{
 		read_bytes = read(fd, temp, BUFFER_SIZE);
 		if (read_bytes < 0)
-		{
-			free(buf);
-			free(temp);
-			return (NULL);
-		}
+			return (free(buf), free(temp), NULL);
 		temp[read_bytes] = '\0';
 		new_buf = ft_strjoin(buf, temp);
 		free(buf);
