@@ -2,7 +2,7 @@
 
   # 42 get_next_line Project
 
-  <p align="center"><a href="https://github.com/aabdulmecitz/42-get-next-line" target="_blank"><img align="center" alt="get_next_line" src="https://github.com/mcombeau/mcombeau/blob/main/42_badges/get_next_linem.png?raw=true"> a></a></p>
+  <p align="center"><a href="https://github.com/aabdulmecitz/42-get-next-line" target="_blank"><img align="center" alt="get_next_line" src="https://github.com/mcombeau/mcombeau/blob/main/42_badges/get_next_linem.png?raw=true"></a></p>
 
   [![forthebadge](https://forthebadge.com/images/badges/made-with-c.svg)](https://forthebadge.com)
   [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
